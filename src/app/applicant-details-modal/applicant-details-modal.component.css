@@ -1,0 +1,14 @@
+.modal-content {
+    background-color: #fff; /* Ensure modal content is bright */
+    color: #000; /* Ensure text is visible */
+  }
+  
+  .modal-backdrop.show {
+    opacity: 0.5; /* Adjust the backdrop opacity if it's too dull */
+    z-index: 0 !important;
+  }
+  
+  .modal-header, .modal-footer {
+    background-color: #f1f1f1; /* Ensure header and footer are visible */
+  }
+ 

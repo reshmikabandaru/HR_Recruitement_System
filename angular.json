@@ -86,13 +86,23 @@
               "src/favicon.ico",
               "src/assets"
             ],
+          
             "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
+  "node_modules/bootstrap/dist/css/bootstrap.min.css",
+  "src/styles.css"
+],
+
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js"
+            
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "21196af2-7f68-4d0f-b1a1-bff3b9d072d7"
   }
+  
 }

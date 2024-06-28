@@ -1,0 +1,36 @@
+  
+.table th {
+    text-align: center;
+    /* Additional styles for table headers */
+    background-color: #f8f9fa; /* Light background for headers */
+    padding: 10px;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table td {
+    text-align: center;
+    /* Additional styles for table cells */
+    padding: 10px;
+    border-top: 1px solid #dee2e6;
+}
+
+.button-margin {
+    margin-right: 10px;
+}
+
+
+.header {
+    background-color: rgb(58, 58, 174);
+    height:100px;
+  }
+
+  .transform {
+    background-color: rgb(50, 50, 129); /* Background color */
+    color: rgb(241, 245, 248); /* Text color */
+    width: 100vw; /* Full viewport width */
+    padding: 20px; /* Adjust padding as needed */
+    margin: 0; /* Remove any default margins */
+    text-align: center; /* Center align text */
+}
+
+

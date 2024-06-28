@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <ng-container *ngFor="let field of Fields">
+    <h4 class="modal-title" *ngIf="field.fieldname === 'View Details'">{{field.fieldname}}</h4>
+    </ng-container>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div *ngIf="applicant && Fields">
+    <div class="modal-body">
+      <ng-container *ngFor="let field of Fields">
+        <p *ngIf="field.fieldname === 'AppRegNo'"><strong>{{field.fieldname}}: </strong> {{ applicant.appregno }}</p>
+        <p *ngIf="field.fieldname === 'FirstName'"><strong>{{field.fieldname}}: </strong> {{ applicant.firstname }}</p>
+        <p *ngIf="field.fieldname === 'DOB'"><strong>{{field.fieldname}}: </strong> {{ applicant.dob }}</p>
+        <p *ngIf="field.fieldname === 'HighestDegree'"><strong>{{field.fieldname}}: </strong> {{ applicant.highestdegree }}</p>
+        <p *ngIf="field.fieldname === 'Percentage'"><strong>{{field.fieldname}}: </strong> {{ applicant.percentage }}</p>
+        <p *ngIf="field.fieldname === 'Experience'"><strong>{{field.fieldname}}: </strong> {{ applicant.experience }}</p>
+        <p *ngIf="field.fieldname === 'JobRole'"><strong>{{field.fieldname}}: </strong> {{ applicant.jobrole }}</p>
+        <p *ngIf="field.fieldname === 'SkillSet'"><strong>{{field.fieldname}}: </strong> {{ applicant.skillset }}</p>
+        <p *ngIf="field.fieldname === 'Certification'"><strong>{{field.fieldname}}: </strong> {{ applicant.certification }}</p>
+        <p *ngIf="field.fieldname === 'CurrentLocation'"><strong>{{field.fieldname}}: </strong> {{ applicant.currentlocation }}</p>
+        <p *ngIf="field.fieldname === 'PrefferedLocation'"><strong>{{field.fieldname}}: </strong> {{ applicant.prefferedlocation }}</p>
+        <p *ngIf="field.fieldname === 'Availability'"><strong>{{field.fieldname}}: </strong> {{ applicant.availability }}</p>
+        <p *ngIf="field.fieldname === 'Email'"><strong>{{field.fieldname}}: </strong> {{ applicant.email }}</p>
+        <p *ngIf="field.fieldname === 'NoticePeriod'"><strong>{{field.fieldname}}: </strong> {{ applicant.noticeperiod }}</p>
+        <p *ngIf="field.fieldname === 'ServingPeriod'"><strong>{{field.fieldname}}: </strong> {{ applicant.servingperiod }}</p>
+        <p *ngIf="field.fieldname === 'Resume'">
+          <strong>{{field.fieldname}}: </strong>
+          <a *ngIf="applicant.applicantresume" href="#" (click)="downloadResume(applicant.applicantresume, applicant.firstname + '_resume.pdf')">{{applicant.firstname}} {{field.fieldname}}</a>
+          <span *ngIf="!applicant.applicantresume">No Resume</span>
+        </p>
+      </ng-container>
+    </div>
+  </div>
+
+  
+  <div class="modal-footer">
+    <a class="btn btn-secondary" (click)="close()">Close</a>
+  </div>
+  

@@ -1,0 +1,128 @@
+<!-- Display dynamic headers -->
+
+
+
+
+    <div class="transform">
+        <div *ngFor="let field of Fields">
+            <div *ngIf="field.fieldtype === 'Header'">
+                <h1 style="color: rgb(241, 245, 248);">{{ field.fieldname }}</h1>
+            </div>
+        </div>
+    </div>
+
+
+<br>
+<div class="container">
+    <div *ngFor="let field of Fields">
+        <div style="margin: 20px; padding-left: 850px;">
+            <button *ngIf="field.fieldtype === 'Button' && field.sequence === 2" class="btn btn-info">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5"/>
+                </svg>
+               {{field.fieldname}}
+            </button>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Center-aligned table for applicant data -->
+     <br>
+    <div style="text-align: center;" class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <ng-container *ngFor="let field of Fields">
+                        <th *ngIf="shouldDisplayHeader(field)" style="text-align: center;">
+                            {{ field.fieldname }}
+                        </th>
+                    </ng-container>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr *ngFor="let applicant of Applicants">
+                    <ng-container *ngFor="let field of Fields">
+                        <td *ngIf="shouldDisplayHeader(field)" style="text-align: center;">
+                            <ng-container [ngSwitch]="field.fieldname">
+                                <ng-container *ngSwitchCase="'AppRegNo'">{{ applicant.appregno }}</ng-container>
+                                <ng-container *ngSwitchCase="'FirstName'">{{ applicant.firstname }}</ng-container>
+                                <ng-container *ngSwitchCase="'LastName'">{{ applicant.lastname }}</ng-container>
+
+                                <ng-container *ngSwitchCase="'Resume'">
+                                    <a *ngIf="applicant.applicantresume" href="#"
+                                        (click)="downloadResume(applicant.applicantresume, applicant.firstname + '_resume.txt')">{{field.fieldname}}</a>
+                                    <span *ngIf="!applicant.applicantresume">No Resume</span>
+                                </ng-container>
+
+
+                                <ng-container *ngSwitchCase="'Round1'">
+                                    <ng-container *ngIf="applicant.round1 === null; else showTextRound1">
+                                        <select>
+                                            <option *ngFor="let value of getFieldValues('Round1')">{{ value }}</option>
+                                        </select>
+                                    </ng-container>
+                                    <ng-template #showTextRound1>{{ applicant.round1 }}</ng-template>
+                                </ng-container>
+
+                                <ng-container *ngSwitchCase="'Round2'">
+                                    <ng-container *ngIf="applicant.round2 === null; else showTextRound2">
+                                        <select>
+                                            <option *ngFor="let value of getFieldValues('Round2')">{{ value }}</option>
+                                        </select>
+                                    </ng-container>
+                                    <ng-template #showTextRound2>{{ applicant.round2 }}</ng-template>
+                                </ng-container>
+
+                                <ng-container *ngSwitchCase="'Round3'">
+                                    <ng-container *ngIf="applicant.round3 === null; else showTextRound3">
+                                        <select>
+                                            <option *ngFor="let value of getFieldValues('Round3')">{{ value }}</option>
+                                        </select>
+                                    </ng-container>
+                                    <ng-template #showTextRound3>{{ applicant.round3 }}</ng-template>
+                                </ng-container>
+
+                                <ng-container *ngFor="let field of Fields">
+                                    <ng-container *ngSwitchCase="'Action'">
+
+
+                                        <ng-container *ngIf="field.fieldtype === 'Button' && field.sequence === 24">
+                                            <button (click)="openDetailsModal(applicant)" style="margin-right: 10px;" class="btn btn-info">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-view-list" viewBox="0 0 16 16">
+                                                    <path d="M3 4.5h10a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2m0 1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM1 2a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 2m0 12a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 14"/>
+                                                  </svg>
+                                                </button>
+                                        </ng-container>
+                                        <ng-container
+                                            *ngIf="field.fieldtype === 'Button' && field.sequence === 25">
+                                            <button style="margin-right: 10px;" class="btn btn-info">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                                                    <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0"/>
+                                                    <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+                                                  </svg> </button>
+                                        </ng-container>
+                                        <ng-container *ngIf="field.fieldtype === 'Button' && field.sequence === 26">
+                                            <button style="margin-right: 10px;" class="btn btn-info">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                                  </svg></button>
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
+
+
+
+
+
+                            </ng-container>
+
+                        </td>
+                    </ng-container>
+                </tr>
+            </tbody>
+        </table>
+    </div>
